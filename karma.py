@@ -57,6 +57,10 @@ def meet_karma(bot, trigger):
     who = msg.split('+')[0].strip()
     reason = msg.split('+')[2].strip()
     karma = get_karma(table, who)[0]
+    #print "'%s'" % reason
+    #print len(reason)
+    if len(reason) == 0:
+        reason = str(None)
     table.update(who, dict(karma=str(int(karma) + 1), reason=reason))
     #bot.say("%s say: %s + 1, reason: %s" % (trigger.nick, who, reason))
 
