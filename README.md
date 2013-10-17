@@ -28,6 +28,7 @@ pip install willie
 cd ~/.willie/modules/
 git clone https://github.com/marlboromoo/willie_karma.git
 ln -s willie_karma/karma.py ./
+willie --configure-database #. setup the database for module to use
 willie #. start the irc-bot
 ```
 ## Upgrade
