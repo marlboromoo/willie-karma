@@ -71,7 +71,7 @@ def karma(bot, trigger):
     """
     if trigger.group(2):
         table = init_table(bot, KARMA)
-        who = trigger.group(2)
+        who = trigger.group(2).strip()
         karma, reason= get_karma(table, who)
         bot.say("%s: %s, reason: %s" % (who, karma, reason))
     else:
