@@ -35,7 +35,7 @@ willie #. start the irc-bot
 ```
 cd ~/.willie/modules/willie_karma/
 git pull
-willie -s
+willie -q
 williee -d
 ```
 
