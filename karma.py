@@ -80,6 +80,6 @@ def karma(bot, trigger):
         karma, reason= get_karma(table, who)
         bot.say("%s: %s, reason: %s" % (who, karma, reason))
     else:
-        bot.say("%skarma <nick> - Reports status for <nick>." % bot.config.prefix.split('\\')[1])
+        bot.say("%skarma <nick> - Reports karma status for <nick>." % bot.config.prefix.split('\\')[1])
 
 
