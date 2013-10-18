@@ -61,8 +61,8 @@ def meet_karma(bot, trigger):
         reason = str(None)
     try:
         table.update(who, dict(karma=str(int(karma) + 1), reason=reason))
-    except Exception:
-        pass
+    except Exception, e:
+        print "Update fail, e: %s" % (e)
     table.update(who, dict(karma=str(int(karma) + 1), reason=reason))
 
 @willie.module.commands('karma')
