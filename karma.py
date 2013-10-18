@@ -14,10 +14,10 @@ KARMA = 'karma'
 REASON = 'reason'
 
 def init_table(bot, name):
-    """@todo: Docstring for init_table.
+    """Return the table instance, create it if not exist.
 
-    :name: @todo
-    :returns: @todo
+    :name: table name
+    :returns: willie.db.Table
 
     """
     if bot.db:
@@ -29,11 +29,11 @@ def init_table(bot, name):
     print 'DB init fail!'
 
 def get_karma(table, who):
-    """@todo: Docstring for get_karma.
+    """Get karma status from the table.
 
-    :table: @todo
-    :who: @todo
-    :returns: @todo
+    :table: willie.db.Table instance
+    :who: nickname of irc user
+    :returns: (karma, reason)
 
     """
     karma, reason = str(0), str(None)
@@ -45,11 +45,10 @@ def get_karma(table, who):
 
 @willie.module.rule('.*\+\+')
 def meet_karma(bot, trigger):
-    """@todo: Docstring for meet_karma.
+    """Update karma status for specify irc user
 
-    :bot: @todo
-    :trigger: @todo
-    :returns: @todo
+    :bot: willie.bot.Willie
+    :trigger: willie.bot.Willie.Trigger
 
     """
     table = init_table(bot, KARMA)
@@ -67,11 +66,10 @@ def meet_karma(bot, trigger):
 
 @willie.module.commands('karma')
 def karma(bot, trigger):
-    """@todo: Docstring for karma.
+    """Command to show the karma status for specify irc user.
 
-    :bot: @todo
-    :trigger: @todo
-    :returns: @todo
+    :bot: willie.bot.Willie
+    :trigger: willie.bot.Willie.Trigger
 
     """
     if trigger.group(2):
