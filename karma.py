@@ -54,15 +54,16 @@ def meet_karma(bot, trigger):
     """
     table = init_table(bot, KARMA)
     msg = trigger.bytes
-    who = msg.split('+')[0].strip()
+    who = msg.split('+')[0].strip().split().pop()
     reason = msg.split('+')[2].strip()
     karma = get_karma(table, who)[0]
-    #print "'%s'" % reason
-    #print len(reason)
     if len(reason) == 0:
         reason = str(None)
+    try:
+        table.update(who, dict(karma=str(int(karma) + 1), reason=reason))
+    except Exception:
+        pass
     table.update(who, dict(karma=str(int(karma) + 1), reason=reason))
-    #bot.say("%s say: %s + 1, reason: %s" % (trigger.nick, who, reason))
 
 @willie.module.commands('karma')
 def karma(bot, trigger):
