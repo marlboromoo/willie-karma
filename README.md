@@ -1,4 +1,5 @@
 # willie-karma
+![Travis CI status] [travis-ci-pic]
 Karma is fun <3
 
 ```
@@ -39,7 +40,7 @@ willie -q
 williee -d
 ```
 ## Usage
-![doc/willie-karma.png] [usage-pic]
+![Usage example] [usage-pic]
 
 ## TODO
  - better parser 
@@ -54,5 +55,6 @@ Released under the [MIT License].
   [Willie]: http://willie.dftba.net/ "Willie"
   [MIT License]: http://opensource.org/licenses/MIT "MIT License"
   [usage-pic]: https://raw.github.com/marlboromoo/willie-karma/master/doc/willie-karma.png
+  [travis-ci-pic]: https://api.travis-ci.org/marlboromoo/willie-karma.png 
 
 
