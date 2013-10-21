@@ -9,6 +9,7 @@ Licensed under the MIT License.
 
 import willie
 
+MODULE = 'karma'
 WHO = 'who'
 KARMA = 'karma'
 REASON = 'reason'
@@ -26,7 +27,7 @@ def init_table(bot, name):
         if not getattr(bot.db, name):
                 bot.db.add_table(name, columns, key)
         return getattr(bot.db, name)
-    print 'DB init fail!'
+    print "%s: DB init fail!" % MODULE
 
 def get_karma(table, who):
     """Get karma status from the table.
@@ -40,7 +41,7 @@ def get_karma(table, who):
     try:
         karma, reason = table.get(who, (KARMA, REASON))
     except Exception, e:
-        print e
+        print "%s: get karma fail - %s." % (MODULE, e)
     return karma, reason
 
 def parse_msg(msg):
@@ -53,8 +54,10 @@ def parse_msg(msg):
     try:
         who = msg.split('+')[0].strip().split().pop()
         reason = msg.split('+')[2].strip()
+        if len(reason) == 0:
+            reason = str(None)
     except Exception, e:
-        print e
+        print "%s: parse message fail - %s." % (MODULE, e)
         return None, None
     return who, reason
 
@@ -67,13 +70,11 @@ def meet_karma(bot, trigger):
         msg = trigger.bytes
         who, reason = parse_msg(msg)
         karma = get_karma(table, who)[0]
-        if all([who , reason, karma]):
-            if len(reason) == 0:
-                reason = str(None)
+        if all([who, reason, karma]):
             try:
                 table.update(who, dict(karma=str(int(karma) + 1), reason=reason))
             except Exception, e:
-                print "Update fail, e: %s" % (e)
+                print "%s : update karma fail, e: %s" % (MODULE, e)
 
 @willie.module.commands('karma')
 def karma(bot, trigger):
@@ -82,10 +83,11 @@ def karma(bot, trigger):
     table = init_table(bot, KARMA)
     if table:
         if trigger.group(2):
-            who = trigger.group(2).strip()
+            who = trigger.group(2).strip().split()[0]
             karma, reason= get_karma(table, who)
             bot.say("%s: %s, reason: %s" % (who, karma, reason))
         else:
             bot.say(".karma <nick> - Reports karma status for <nick>.")
     else:
         bot.say("Setup the database first, contact your bot admin.")
+
