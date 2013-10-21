@@ -63,27 +63,29 @@ def meet_karma(bot, trigger):
     """Update karma status for specify irc user.
     """
     table = init_table(bot, KARMA)
-    msg = trigger.bytes
-    who, reason = parse_msg(msg)
-    karma = get_karma(table, who)[0]
-    if all([who , reason, karma]):
-        if len(reason) == 0:
-            reason = str(None)
-        try:
-            table.update(who, dict(karma=str(int(karma) + 1), reason=reason))
-        except Exception, e:
-            print "Update fail, e: %s" % (e)
+    if table:
+        msg = trigger.bytes
+        who, reason = parse_msg(msg)
+        karma = get_karma(table, who)[0]
+        if all([who , reason, karma]):
+            if len(reason) == 0:
+                reason = str(None)
+            try:
+                table.update(who, dict(karma=str(int(karma) + 1), reason=reason))
+            except Exception, e:
+                print "Update fail, e: %s" % (e)
 
 @willie.module.commands('karma')
 def karma(bot, trigger):
     """Command to show the karma status for specify irc user.
     """
-    if trigger.group(2):
-        table = init_table(bot, KARMA)
-        who = trigger.group(2).strip()
-        karma, reason= get_karma(table, who)
-        bot.say("%s: %s, reason: %s" % (who, karma, reason))
+    table = init_table(bot, KARMA)
+    if table:
+        if trigger.group(2):
+            who = trigger.group(2).strip()
+            karma, reason= get_karma(table, who)
+            bot.say("%s: %s, reason: %s" % (who, karma, reason))
+        else:
+            bot.say(".karma <nick> - Reports karma status for <nick>.")
     else:
-        bot.say(".karma <nick> - Reports karma status for <nick>.")
-
-
+        bot.say("Setup the database first, contact your bot admin.")
