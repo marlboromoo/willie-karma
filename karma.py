@@ -44,10 +44,10 @@ def get_karma(table, who):
     return karma, reason
 
 def parse_msg(msg):
-    """@todo: Docstring for parse_msg.
+    """Parse the message send from irc user.
 
-    :msg: @todo
-    :returns: @todo
+    :msg: message
+    :returns: (who, reason)
 
     """
     try:
@@ -60,11 +60,7 @@ def parse_msg(msg):
 
 @willie.module.rule('.*\+\+')
 def meet_karma(bot, trigger):
-    """Update karma status for specify irc user
-
-    :bot: willie.bot.Willie
-    :trigger: willie.bot.Willie.Trigger
-
+    """Update karma status for specify irc user.
     """
     table = init_table(bot, KARMA)
     msg = trigger.bytes
@@ -81,10 +77,6 @@ def meet_karma(bot, trigger):
 @willie.module.commands('karma')
 def karma(bot, trigger):
     """Command to show the karma status for specify irc user.
-
-    :bot: willie.bot.Willie
-    :trigger: willie.bot.Willie.Trigger
-
     """
     if trigger.group(2):
         table = init_table(bot, KARMA)
