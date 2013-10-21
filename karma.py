@@ -39,9 +39,24 @@ def get_karma(table, who):
     karma, reason = str(0), str(None)
     try:
         karma, reason = table.get(who, (KARMA, REASON))
-    except Exception:
-        pass
+    except Exception, e:
+        print e
     return karma, reason
+
+def parse_msg(msg):
+    """@todo: Docstring for parse_msg.
+
+    :msg: @todo
+    :returns: @todo
+
+    """
+    try:
+        who = msg.split('+')[0].strip().split().pop()
+        reason = msg.split('+')[2].strip()
+    except Exception, e:
+        print e
+        return None, None
+    return who, reason
 
 @willie.module.rule('.*\+\+')
 def meet_karma(bot, trigger):
@@ -53,15 +68,15 @@ def meet_karma(bot, trigger):
     """
     table = init_table(bot, KARMA)
     msg = trigger.bytes
-    who = msg.split('+')[0].strip().split().pop()
-    reason = msg.split('+')[2].strip()
+    who, reason = parse_msg(msg)
     karma = get_karma(table, who)[0]
-    if len(reason) == 0:
-        reason = str(None)
-    try:
-        table.update(who, dict(karma=str(int(karma) + 1), reason=reason))
-    except Exception, e:
-        print "Update fail, e: %s" % (e)
+    if all([who , reason, karma]):
+        if len(reason) == 0:
+            reason = str(None)
+        try:
+            table.update(who, dict(karma=str(int(karma) + 1), reason=reason))
+        except Exception, e:
+            print "Update fail, e: %s" % (e)
 
 @willie.module.commands('karma')
 def karma(bot, trigger):
