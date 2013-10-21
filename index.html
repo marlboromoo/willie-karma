@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Willie-karma by marlboromoo</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Willie-karma</h1>
+        <h2>Karma is fun, a module for willie IRC bot.</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/marlboromoo/willie-karma/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/marlboromoo/willie-karma/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/marlboromoo/willie-karma" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a name="willie-karma" class="anchor" href="#willie-karma"><span class="octicon octicon-link"></span></a>willie-karma</h1>
+
+<p>Karma is fun &lt;3</p>
+
+<pre><code>          _ _ _ _            _
+__      _(_) | (_) ___      | | ____ _ _ __ _ __ ___   __ _
+\ \ /\ / / | | | |/ _ \_____| |/ / _` | '__| '_ ` _ \ / _` |
+ \ V  V /| | | | |  __/_____|   &lt; (_| | |  | | | | | | (_| |
+  \_/\_/ |_|_|_|_|\___|     |_|\_\__,_|_|  |_| |_| |_|\__,_|
+
+</code></pre>
+
+<h2>
+<a name="requirments" class="anchor" href="#requirments"><span class="octicon octicon-link"></span></a>Requirments</h2>
+
+<ul>
+<li>Python</li>
+<li><a href="http://willie.dftba.net/" title="Willie">Willie</a></li>
+</ul><h2>
+<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<h3>
+<a name="dependency" class="anchor" href="#dependency"><span class="octicon octicon-link"></span></a>Dependency</h3>
+
+<pre><code>sudo su -
+apt-get install python python-dev python-pip build-essential
+pip install willie
+</code></pre>
+
+<h3>
+<a name="willie-karma-1" class="anchor" href="#willie-karma-1"><span class="octicon octicon-link"></span></a>willie-karma</h3>
+
+<pre><code>cd ~/.willie/modules/
+git clone https://github.com/marlboromoo/willie_karma.git
+ln -s willie_karma/karma.py ./
+willie --configure-database #. setup the database for module to use
+willie #. start the irc-bot
+</code></pre>
+
+<h2>
+<a name="upgrade" class="anchor" href="#upgrade"><span class="octicon octicon-link"></span></a>Upgrade</h2>
+
+<pre><code>cd ~/.willie/modules/willie_karma/
+git pull
+willie -q
+williee -d
+</code></pre>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p><img src="doc/willie-karma.png" alt="doc/willie-karma.png" title="Usage"></p>
+
+<h2>
+<a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>TODO</h2>
+
+<ul>
+<li>better parser </li>
+<li>you tell me</li>
+</ul><h2>
+<a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>Author</h2>
+
+<p>Timothy.Lee a.k.a MarlboroMoo.</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Released under the <a href="http://opensource.org/licenses/MIT" title="MIT License">MIT License</a>.</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
