@@ -94,7 +94,7 @@ def _parse_msg(msg, method='+'):
         who = msg.split(method)[0].strip().split().pop()
         reason = msg.split(method)[2].strip()
         if len(reason) == 0:
-            reason = str(None)
+            reason = None
     except Exception, e:
         print "%s: parse message fail - %s." % (MODULE, e)
         return None, None
@@ -129,8 +129,8 @@ def _meet_karma(bot, trigger, parse_fun, karma_fun):
     if table:
         msg = trigger.bytes
         who, reason = parse_fun(msg)
-        if all([who, reason]):
-            karma_fun(table, who, reason)
+        if who:
+            karma_fun(table, who, str(reason))
 
 @willie.module.rule('.*\+\+')
 def meet_add_karma(bot, trigger):
@@ -158,4 +158,5 @@ def karma(bot, trigger):
             bot.say(".karma <nick> - Reports karma status for <nick>.")
     else:
         bot.say("Setup the database first, contact your bot admin.")
+
 
