@@ -38,6 +38,8 @@ git pull
 willie -q
 williee -d
 ```
+## Usage
+![doc/willie-karma.png] [usage-pic]
 
 ## TODO
  - better parser 
@@ -51,4 +53,6 @@ Released under the [MIT License].
 
   [Willie]: http://willie.dftba.net/ "Willie"
   [MIT License]: http://opensource.org/licenses/MIT "MIT License"
+  [usage-pic]: doc/willie-karma.png "Usage"
+
 
