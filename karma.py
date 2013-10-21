@@ -93,6 +93,8 @@ def _parse_msg(msg, method='+'):
     try:
         who = msg.split(method)[0].strip().split().pop()
         reason = msg.split(method)[2].strip()
+        if '#' in reason:
+            reason = reason.split('#')[1].strip()
         if len(reason) == 0:
             reason = None
     except Exception, e:
