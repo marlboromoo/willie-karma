@@ -53,6 +53,6 @@ Released under the [MIT License].
 
   [Willie]: http://willie.dftba.net/ "Willie"
   [MIT License]: http://opensource.org/licenses/MIT "MIT License"
-  [usage-pic]: https://github.com/marlboromoo/willie-karma/blob/master/doc/willie-karma.png "Usage"
+  [usage-pic]: https://raw.github.com/marlboromoo/willie-karma/master/doc/willie-karma.png
 
 
