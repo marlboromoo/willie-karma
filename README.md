@@ -1,5 +1,4 @@
 # willie-karma
-![Travis CI status] [travis-ci-pic]
 Karma is fun <3
 
 ```
@@ -45,6 +44,9 @@ williee -d
 ## TODO
  - better parser 
  - you tell me
+
+## Code Status
+![Travis CI Build Status] [travis-ci-pic]
 
 ## Author
 Timothy.Lee a.k.a MarlboroMoo.
