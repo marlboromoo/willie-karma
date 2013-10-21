@@ -33,7 +33,7 @@ def get_karma(table, who):
     """Get karma status from the table.
 
     :table: willie.db.Table instance
-    :who: nickname of irc user
+    :who: nickname of IRC user
     :returns: (karma, reason)
 
     """
@@ -44,16 +44,55 @@ def get_karma(table, who):
         print "%s: get karma fail - %s." % (MODULE, e)
     return karma, reason
 
-def parse_msg(msg):
-    """Parse the message send from irc user.
+def _update_karma(table, who, reason, method='+'):
+    """Update karma for specify IRC user.
+
+    :table: willie.db.Table
+    :who: nickname of IRC user
+    :reason: reason
+    :method: '+' or '-'
+
+    """
+    karma = get_karma(table, who)[0]
+    karma = int(karma) if karma else 0
+    try:
+        if method == '+':
+            table.update(who, dict(karma=str(karma + 1), reason=reason))
+        else:
+            table.update(who, dict(karma=str(karma - 1), reason=reason))
+    except Exception, e:
+        print "%s : update karma fail, e: %s" % (MODULE, e)
+
+def add_karma(table, who, reason):
+    """Add karma for specify IRC user.
+
+    :table: willie.db.Table
+    :who: nickname of IRC user
+    :reason: reason
+
+    """
+    return _update_karma(table, who, reason, '+')
+
+def subtract_karma(table, who, reason):
+    """Subtract karma for specify IRC user.
+
+    :table: willie.db.Table
+    :who: nickname of IRC user
+    :reason: reason
+
+    """
+    return _update_karma(table, who, reason, '-')
+
+def _parse_msg(msg, method='+'):
+    """Parse the message.
 
     :msg: message
     :returns: (who, reason)
 
     """
     try:
-        who = msg.split('+')[0].strip().split().pop()
-        reason = msg.split('+')[2].strip()
+        who = msg.split(method)[0].strip().split().pop()
+        reason = msg.split(method)[2].strip()
         if len(reason) == 0:
             reason = str(None)
     except Exception, e:
@@ -61,24 +100,53 @@ def parse_msg(msg):
         return None, None
     return who, reason
 
-@willie.module.rule('.*\+\+')
-def meet_karma(bot, trigger):
-    """Update karma status for specify irc user.
+def parse_add(msg):
+    """Parse the message with '++'.
+
+    :msg: message
+    :returns: (who, reason)
+
+    """
+    return _parse_msg(msg, method='+')
+
+def parse_subtract(msg):
+    """Parse the message with '--'.
+
+    :msg: message
+    :returns: (who, reason)
+
+    """
+    return _parse_msg(msg, method='-')
+
+def _meet_karma(bot, trigger, parse_fun, karma_fun):
+    """Update karma status for specify IRC user
+
+    :bot: willie.bot.Willie
+    :trigger: willie.bot.Willie.Trigger
+
     """
     table = init_table(bot, KARMA)
     if table:
         msg = trigger.bytes
-        who, reason = parse_msg(msg)
-        karma = get_karma(table, who)[0]
-        if all([who, reason, karma]):
-            try:
-                table.update(who, dict(karma=str(int(karma) + 1), reason=reason))
-            except Exception, e:
-                print "%s : update karma fail, e: %s" % (MODULE, e)
+        who, reason = parse_fun(msg)
+        if all([who, reason]):
+            karma_fun(table, who, reason)
+
+@willie.module.rule('.*\+\+')
+def meet_add_karma(bot, trigger):
+    """Update karma status for specify IRC user if get '++' message.
+    """
+    return _meet_karma(bot, trigger, parse_add, add_karma)
+
+@willie.module.rule('.*\-\-')
+def meet_subtract_karma(bot, trigger):
+    """Update karma status for specify IRC user if get '--' message.
+    """
+    return _meet_karma(bot, trigger, parse_subtract, subtract_karma)
 
 @willie.module.commands('karma')
 def karma(bot, trigger):
-    """Command to show the karma status for specify irc user.
+    """Command to show the karma status for specify IRC user.
     """
     table = init_table(bot, KARMA)
     if table:
