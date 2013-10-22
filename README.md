@@ -39,14 +39,14 @@ willie -q
 williee -d
 ```
 ## Usage
-![Usage example] [usage-pic]
+![Usage example] []
 
 ## TODO
  - better parser 
  - you tell me
 
-## Code Status
-![Travis CI Build Status] [travis-ci-pic]
+## Status
+![Travis CI Build Status] []
 
 ## Author
 Timothy.Lee a.k.a MarlboroMoo.
@@ -56,7 +56,7 @@ Released under the [MIT License].
 
   [Willie]: http://willie.dftba.net/ "Willie"
   [MIT License]: http://opensource.org/licenses/MIT "MIT License"
-  [usage-pic]: https://raw.github.com/marlboromoo/willie-karma/master/doc/willie-karma.png
-  [travis-ci-pic]: https://api.travis-ci.org/marlboromoo/willie-karma.png 
+  [Useage example]: https://raw.github.com/marlboromoo/willie-karma/master/doc/willie-karma.png
+  [Travis CI Build Status]: https://api.travis-ci.org/marlboromoo/willie-karma.png 
 
 
