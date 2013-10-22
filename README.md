@@ -56,7 +56,7 @@ Released under the [MIT License].
 
   [Willie]: http://willie.dftba.net/ "Willie"
   [MIT License]: http://opensource.org/licenses/MIT "MIT License"
-  [Useage example]: https://raw.github.com/marlboromoo/willie-karma/master/doc/willie-karma.png
+  [Usage example]: https://raw.github.com/marlboromoo/willie-karma/master/doc/willie-karma.png
   [Travis CI Build Status]: https://api.travis-ci.org/marlboromoo/willie-karma.png 
 
 
