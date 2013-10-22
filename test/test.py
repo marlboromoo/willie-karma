@@ -4,7 +4,7 @@
 from karma import parse_add, parse_subtract
 
 USER = 'user'
-REASON = 'reson'
+REASON = '中文測試'
 
 
 def gen_expect_msgs(modify='++'):

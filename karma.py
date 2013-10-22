@@ -138,7 +138,8 @@ def _meet_karma(bot, trigger, parse_fun, karma_fun):
         msg = trigger.bytes
         who, reason = parse_fun(msg)
         if who:
-            karma_fun(table, who, str(reason))
+            reason = reason if reason else str(None)
+            karma_fun(table, who, reason)
 
 @willie.module.rule('.*\+\+')
 def meet_add_karma(bot, trigger):
