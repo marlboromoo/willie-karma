@@ -28,6 +28,7 @@ def gen_unexpect_msgs(modify='++'):
         "++ %s, %s --" % (USER, USER),
         "%s %s, %s -- # %s" % (modify, USER, USER, REASON),
         "%s %s, %s %s # %s" % (modify, USER, USER, modify, REASON),
+        "<!%s #$Q#$@ %s!>" % (modify, modify),
     ]
 
 def _test_parse(fun, modify='++'):

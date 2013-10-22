@@ -7,6 +7,7 @@ Copyright 2013, Timothy Lee <marlboromoo@gmail.com>
 Licensed under the MIT License.
 """
 
+import string
 import willie
 
 MODULE = 'karma'
@@ -97,6 +98,11 @@ def _parse_msg(msg, method='+'):
             reason = reason.split('#')[1].strip()
         if len(reason) == 0:
             reason = None
+        #. check if nickname only contain [a-Z_]
+        for s in who:
+            if s not in "%s_" % string.ascii_letters:
+                who = None
+                break
     except Exception, e:
         print "%s: parse message fail - %s." % (MODULE, e)
         return None, None
