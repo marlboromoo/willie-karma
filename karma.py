@@ -15,20 +15,30 @@ WHO = 'who'
 KARMA = 'karma'
 REASON = 'reason'
 
-def init_table(bot, name):
-    """Return the table instance, create it if not exist.
+def setup(bot):
+    """Setup the database, create the table if not exist.
 
-    :name: table name
-    :returns: willie.db.Table
+    :bot: willie.bot.Willie
 
     """
     if bot.db:
-        key = WHO
+        key, name = WHO, KARMA
         columns = [key, KARMA, REASON]
         if not getattr(bot.db, name):
-                bot.db.add_table(name, columns, key)
-        return getattr(bot.db, name)
-    print "%s: DB init fail!" % MODULE
+                try:
+                    bot.db.add_table(name, columns, key)
+                except Exception, e:
+                    print "%s: Table init fail: %s" % (MODULE, e)
+    print "%s: DB init fail, setup the DB first!" % MODULE
+
+def get_table(bot):
+    """Return the table instance.
+
+    :bot: willie.bot.Willie
+    :returns: willie.db.Table
+
+    """
+    return getattr(bot.db, KARMA)
 
 def get_karma(table, who):
     """Get karma status from the table.
@@ -133,7 +143,7 @@ def _meet_karma(bot, trigger, parse_fun, karma_fun):
     :trigger: willie.bot.Willie.Trigger
 
     """
-    table = init_table(bot, KARMA)
+    table = get_table(bot)
     if table:
         msg = trigger.bytes
         who, reason = parse_fun(msg)
@@ -157,7 +167,7 @@ def meet_subtract_karma(bot, trigger):
 def karma(bot, trigger):
     """Command to show the karma status for specify IRC user.
     """
-    table = init_table(bot, KARMA)
+    table = get_table(bot)
     if table:
         if trigger.group(2):
             who = trigger.group(2).strip().split()[0]
