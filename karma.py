@@ -38,7 +38,10 @@ def get_table(bot):
     :returns: willie.db.Table
 
     """
-    return getattr(bot.db, KARMA)
+    try:
+        return getattr(bot.db, KARMA)
+    except Exception:
+        return None
 
 def get_karma(table, who):
     """Get karma status from the table.
