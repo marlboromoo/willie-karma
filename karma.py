@@ -28,7 +28,7 @@ def setup(bot):
                 try:
                     bot.db.add_table(name, columns, key)
                 except Exception, e:
-                    print "%s: Table init fail: %s" % (MODULE, e)
+                    print "%s: Table init fail - %s" % (MODULE, e)
     print "%s: DB init fail, setup the DB first!" % MODULE
 
 def get_table(bot):
