@@ -117,6 +117,8 @@ def _parse_msg(msg, method='+'):
             if s not in "%s_" % string.ascii_letters:
                 who = None
                 break
+        #. strip illegal chars
+        reason = reason.replace('"', '') if reason else reason
     except Exception, e:
         print "%s: parse message fail - %s." % (MODULE, e)
         return None, None
