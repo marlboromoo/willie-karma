@@ -156,7 +156,10 @@ def _meet_karma(bot, trigger, parse_fun, karma_fun):
         if who:
             reason = reason if reason else str(None)
             karma_fun(table, who, reason)
+            karma, reason= get_karma(table, who)
+            bot.say("%s: %s, reason: %s" % (who, karma, reason))
 
+    
 @willie.module.rule('.*\+\+')
 def meet_add_karma(bot, trigger):
     """Update karma status for specify IRC user if get '++' message.
