@@ -22,7 +22,13 @@ DEBUG_LEVEL = 'verbose'
 
 feedback = None
 byself = None
-debug = None
+
+def debug_(tag, text, level):
+    """Mimic willie.debug function for pytest to use.
+    """
+    print "[%s] %s" % (tag, text)
+
+debug = debug_
 
 def configure(config):
     """
@@ -45,7 +51,7 @@ def setup(bot):
     """
     #. get debug function
     global debug
-    debug = bot.debug
+    debug = bot.debug if bot.debug else debug
     #. get settings
     feedback_, byself_, debug_ = True, False, False
     try:

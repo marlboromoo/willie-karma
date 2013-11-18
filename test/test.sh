@@ -1,3 +1,3 @@
 #!/bin/sh
-
-PYTHONPATH=./ python -m pytest test/test.py
+cd $(dirname $0)
+PYTHONPATH=../ python -m pytest test.py
