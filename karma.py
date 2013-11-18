@@ -196,7 +196,7 @@ def parse_demote(msg):
     """
     return _parse_msg(msg, method='-')
 
-def _meet_karma(bot, trigger, parse_fun, karma_fun):
+def meet_karma(bot, trigger, parse_fun, karma_fun):
     """Update karma status for specify IRC user
 
     :bot: willie.bot.Willie
@@ -227,13 +227,13 @@ def _meet_karma(bot, trigger, parse_fun, karma_fun):
 def meet_promote_karma(bot, trigger):
     """Update karma status for specify IRC user if get '++' message.
     """
-    return _meet_karma(bot, trigger, parse_promote, promote_karma)
+    return meet_karma(bot, trigger, parse_promote, promote_karma)
 
 @willie.module.rule(r'^[\w][\S]+[\-\-]')
 def meet_demote_karma(bot, trigger):
     """Update karma status for specify IRC user if get '--' message.
     """
-    return _meet_karma(bot, trigger, parse_demote, demote_karma)
+    return meet_karma(bot, trigger, parse_demote, demote_karma)
 
 @willie.module.commands('karma')
 def karma(bot, trigger):
