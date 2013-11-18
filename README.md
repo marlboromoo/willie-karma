@@ -45,7 +45,7 @@ williee -d
 | [karma] | example | purpose |
 | ------- | ------- | ------- |
 | feedback | True | Notify by bot |
-| byself | False | Self (pro|de)mote |
+| byself | False | Self (pro&#124;de)mote |
 
 ## Usage
  * Use `.karma <nickname>` to get karma status.
