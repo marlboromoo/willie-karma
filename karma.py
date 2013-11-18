@@ -78,8 +78,8 @@ def _update_karma(table, who, reason, method='+'):
     except Exception, e:
         print "%s : update karma fail, e: %s" % (MODULE, e)
 
-def add_karma(table, who, reason):
-    """Add karma for specify IRC user.
+def promote_karma(table, who, reason):
+    """Promote karma for specify IRC user.
 
     :table: willie.db.Table
     :who: nickname of IRC user
@@ -88,8 +88,8 @@ def add_karma(table, who, reason):
     """
     return _update_karma(table, who, reason, '+')
 
-def subtract_karma(table, who, reason):
-    """Subtract karma for specify IRC user.
+def demote_karma(table, who, reason):
+    """Demote karma for specify IRC user.
 
     :table: willie.db.Table
     :who: nickname of IRC user
@@ -124,7 +124,7 @@ def _parse_msg(msg, method='+'):
         return None, None
     return who, reason
 
-def parse_add(msg):
+def parse_promote(msg):
     """Parse the message with '++'.
 
     :msg: message
@@ -133,7 +133,7 @@ def parse_add(msg):
     """
     return _parse_msg(msg, method='+')
 
-def parse_subtract(msg):
+def parse_demote(msg):
     """Parse the message with '--'.
 
     :msg: message
@@ -159,18 +159,17 @@ def _meet_karma(bot, trigger, parse_fun, karma_fun):
             karma, reason= get_karma(table, who)
             bot.say("%s: %s, reason: %s" % (who, karma, reason))
 
-    
 @willie.module.rule(r'^[\w][\S]+[\+\+]')
-def meet_add_karma(bot, trigger):
+def meet_promote_karma(bot, trigger):
     """Update karma status for specify IRC user if get '++' message.
     """
-    return _meet_karma(bot, trigger, parse_add, add_karma)
+    return _meet_karma(bot, trigger, parse_promote, promote_karma)
 
 @willie.module.rule(r'^[\w][\S]+[\-\-]')
-def meet_subtract_karma(bot, trigger):
+def meet_demote_karma(bot, trigger):
     """Update karma status for specify IRC user if get '--' message.
     """
-    return _meet_karma(bot, trigger, parse_subtract, subtract_karma)
+    return _meet_karma(bot, trigger, parse_demote, demote_karma)
 
 @willie.module.commands('karma')
 def karma(bot, trigger):
@@ -186,5 +185,4 @@ def karma(bot, trigger):
             bot.say(".karma <nick> - Reports karma status for <nick>.")
     else:
         bot.say("Setup the database first, contact your bot admin.")
-
 

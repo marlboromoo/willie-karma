@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from karma import parse_add, parse_subtract
+from karma import parse_promote, parse_demote
 
 USER = 'user'
 REASON = '中文測試'
@@ -37,8 +37,8 @@ def _test_parse(fun, modify='++'):
     for msg in gen_unexpect_msgs(modify):
         assert None in fun(msg)
 
-def test_parse_add():
-    _test_parse(parse_add, '++')
+def test_parse_promote():
+    _test_parse(parse_promote, '++')
 
-def test_parse_subtract():
-    _test_parse(parse_subtract, '--')
+def test_parse_demote():
+    _test_parse(parse_demote, '--')
