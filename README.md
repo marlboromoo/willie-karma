@@ -2,11 +2,14 @@
 Karma is fun <3
 
 ```
-          _ _ _ _            _
-__      _(_) | (_) ___      | | ____ _ _ __ _ __ ___   __ _
-\ \ /\ / / | | | |/ _ \_____| |/ / _` | '__| '_ ` _ \ / _` |
- \ V  V /| | | | |  __/_____|   < (_| | |  | | | | | | (_| |
-  \_/\_/ |_|_|_|_|\___|     |_|\_\__,_|_|  |_| |_| |_|\__,_|
+Willie -
+ __  __
+/\ \/\ \
+\ \ \/'/'     __     _ __    ___ ___      __
+ \ \ , <    /'__`\  /\`'__\/' __` __`\  /'__`\
+  \ \ \\`\ /\ \L\.\_\ \ \/ /\ \/\ \/\ \/\ \L\.\_
+   \ \_\ \_\ \__/.\_\\ \_\ \ \_\ \_\ \_\ \__/.\_\
+    \/_/\/_/\/__/\/_/ \/_/  \/_/\/_/\/_/\/__/\/_/
 
 ```
 
@@ -38,15 +41,23 @@ git pull
 willie -q
 williee -d
 ```
+## Configuration
+| [karma] | example | purpose |
+| ------- | ------- | ------- |
+| feedback | True | Notify by bot |
+| byself | False | Self (pro|de)mote |
+
 ## Usage
-![Usage example] []
+ * Use `.karma <nickname>` to get karma status.
+ * Input `<nickname>++ [#] [Reason]` to promote.
+ * Input `<nickname>-- [#] [Reason]` to demote.
 
 ## TODO
  - better parser 
  - you tell me
 
 ## Status
-![Travis CI Build Status] []
+[![Travis CI Build Status] []] [Travis CI]
 
 ## Author
 Timothy.Lee a.k.a MarlboroMoo.
@@ -58,5 +69,6 @@ Released under the [MIT License].
   [MIT License]: http://opensource.org/licenses/MIT "MIT License"
   [Usage example]: https://raw.github.com/marlboromoo/willie-karma/master/doc/willie-karma.png
   [Travis CI Build Status]: https://api.travis-ci.org/marlboromoo/willie-karma.png 
+  [Travis CI]: https://travis-ci.org/marlboromoo/willie-karma
 
 
