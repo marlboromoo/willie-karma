@@ -10,17 +10,55 @@ Licensed under the MIT License.
 import string
 import willie
 
+###############################################################################
+# Setup the module
+###############################################################################
+
 MODULE = 'karma'
 WHO = 'who'
 KARMA = 'karma'
 REASON = 'reason'
+DEBUG_LEVEL = 'verbose'
+
+feedback = None
+byself = None
+debug = None
+
+def configure(config):
+    """
+
+    | [karma] | example | purpose |
+    | ------- | ------- | ------- |
+    | feedback | True | Notify by bot |
+    | byself | False | Self (pro|de)mote |
+
+    """
+    if config.option('Configure karma', False):
+        config.interactive_add('karma', 'feedback', 'Notify by bot', 'True')
+        config.interactive_add('karma', 'byself', 'Self (pro|de)mote', 'False')
 
 def setup(bot):
-    """Setup the database, create the table if not exist.
+    """Setup the database, get the settings.
 
     :bot: willie.bot.Willie
 
     """
+    #. get debug function
+    global debug
+    debug = bot.debug
+    #. get settings
+    feedback_, byself_, debug_ = True, False, False
+    try:
+        config = getattr(bot.config, MODULE)
+        feedback_ = is_true(config.feedback)
+        byself_ = is_true(config.byself)
+    except Exception, e:
+        pass
+    global feedback, byself
+    feedback = feedback_
+    byself = byself_
+
+    #. check database
     if bot.db:
         key, name = WHO, KARMA
         columns = [key, KARMA, REASON]
@@ -28,9 +66,25 @@ def setup(bot):
                 try:
                     bot.db.add_table(name, columns, key)
                 except Exception, e:
-                    print "%s: Table init fail - %s" % (MODULE, e)
+                    debug(MODULE, 'Table init fail - %s' % (e), DEBUG_LEVEL)
+                    raise e
     else:
-        print "%s: DB init fail, setup the DB first!" % MODULE
+        msg = "DB init fail, setup the DB first!"
+        debug(MODULE, msg, DEBUG_LEVEL)
+        raise Exception(msg)
+
+###############################################################################
+# Helper function
+###############################################################################
+
+def is_true(value):
+    """Return True if value is true
+
+    :value: value
+    :returns: True or False
+
+    """
+    return True if  value.lower() == 'true' else False
 
 def get_table(bot):
     """Return the table instance.
@@ -56,7 +110,7 @@ def get_karma(table, who):
     try:
         karma, reason = table.get(who, (KARMA, REASON))
     except Exception, e:
-        print "%s: get karma fail - %s." % (MODULE, e)
+        debug(MODULE, "get karma fail - %s." % (e), DEBUG_LEVEL)
     return karma, reason
 
 def _update_karma(table, who, reason, method='+'):
@@ -76,7 +130,7 @@ def _update_karma(table, who, reason, method='+'):
         else:
             table.update(who, dict(karma=str(karma - 1), reason=reason))
     except Exception, e:
-        print "%s : update karma fail, e: %s" % (MODULE, e)
+        debug(MODULE, "update karma fail, e: %s" % (e), DEBUG_LEVEL)
 
 def promote_karma(table, who, reason):
     """Promote karma for specify IRC user.
@@ -120,7 +174,7 @@ def _parse_msg(msg, method='+'):
         #. strip illegal chars
         reason = reason.replace('"', '') if reason else reason
     except Exception, e:
-        print "%s: parse message fail - %s." % (MODULE, e)
+        debug(MODULE, "parse message fail - %s." % (e), DEBUG_LEVEL)
         return None, None
     return who, reason
 
@@ -154,10 +208,20 @@ def _meet_karma(bot, trigger, parse_fun, karma_fun):
         msg = trigger.bytes
         who, reason = parse_fun(msg)
         if who:
+            #. not allow self (pro|de)mote
+            if not byself:
+                if who == trigger.nick:
+                    return
+            #. update karma
             reason = reason if reason else str(None)
             karma_fun(table, who, reason)
             karma, reason= get_karma(table, who)
-            bot.say("%s: %s, reason: %s" % (who, karma, reason))
+            if feedback:
+                bot.say("%s: %s, reason: %s" % (who, karma, reason))
+
+###############################################################################
+# Event & Command
+###############################################################################
 
 @willie.module.rule(r'^[\w][\S]+[\+\+]')
 def meet_promote_karma(bot, trigger):
