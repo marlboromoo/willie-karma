@@ -1,43 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-
     <title>Willie-karma by marlboromoo</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
-
   <body>
-
-    <header>
-      <div class="container">
+    <div class="wrapper">
+      <header>
         <h1>Willie-karma</h1>
-        <h2>Karma is fun, a module for willie IRC bot.</h2>
+        <p>Karma is fun, a module for willie IRC bot.</p>
 
-        <section id="downloads">
-          <a href="https://github.com/marlboromoo/willie-karma/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/marlboromoo/willie-karma/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/marlboromoo/willie-karma" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
+        <p class="view"><a href="https://github.com/marlboromoo/willie-karma">View the Project on GitHub <small>marlboromoo/willie-karma</small></a></p>
 
-    <div class="container">
-      <section id="main_content">
+
+        <ul>
+          <li><a href="https://github.com/marlboromoo/willie-karma/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/marlboromoo/willie-karma/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/marlboromoo/willie-karma">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
         <h1>
 <a name="willie-karma" class="anchor" href="#willie-karma"><span class="octicon octicon-link"></span></a>willie-karma</h1>
 
 <p>Karma is fun &lt;3</p>
 
-<pre><code>          _ _ _ _            _
-__      _(_) | (_) ___      | | ____ _ _ __ _ __ ___   __ _
-\ \ /\ / / | | | |/ _ \_____| |/ / _` | '__| '_ ` _ \ / _` |
- \ V  V /| | | | |  __/_____|   &lt; (_| | |  | | | | | | (_| |
-  \_/\_/ |_|_|_|_|\___|     |_|\_\__,_|_|  |_| |_| |_|\__,_|
+<pre><code>Willie -
+ __  __
+/\ \/\ \
+\ \ \/'/'     __     _ __    ___ ___      __
+ \ \ , &lt;    /'__`\  /\`'__\/' __` __`\  /'__`\
+  \ \ \\`\ /\ \L\.\_\ \ \/ /\ \/\ \/\ \/\ \L\.\_
+   \ \_\ \_\ \__/.\_\\ \_\ \ \_\ \_\ \_\ \__/.\_\
+    \/_/\/_/\/__/\/_/ \/_/  \/_/\/_/\/_/\/__/\/_/
 
 </code></pre>
 
@@ -78,11 +81,37 @@ williee -d
 </code></pre>
 
 <h2>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h2>
 
-<p><img src="https://raw.github.com/marlboromoo/willie-karma/master/doc/willie-karma.png" alt="Usage example"></p>
+<table>
+<thead><tr>
+<th>[karma]</th>
+<th>example</th>
+<th>purpose</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>feedback</td>
+<td>True</td>
+<td>Notify by bot</td>
+</tr>
+<tr>
+<td>byself</td>
+<td>False</td>
+<td>Self (pro|de)mote</td>
+</tr>
+</tbody>
+</table><p>If you want to see the debug messages, set the <code>verbose</code> to <strong>verbose</strong> under 
+the <code>[core]</code> section.</p>
 
 <h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<ul>
+<li>Use <code>.karma &lt;nickname&gt;</code> to get karma status.</li>
+<li>Input <code>&lt;nickname&gt;++ [#] [Reason]</code> to promote.</li>
+<li>Input <code>&lt;nickname&gt;-- [#] [Reason]</code> to demote.</li>
+</ul><h2>
 <a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>TODO</h2>
 
 <ul>
@@ -91,7 +120,7 @@ williee -d
 </ul><h2>
 <a name="status" class="anchor" href="#status"><span class="octicon octicon-link"></span></a>Status</h2>
 
-<p><img src="https://api.travis-ci.org/marlboromoo/willie-karma.png" alt="Travis CI Build Status"></p>
+<p><a href="https://travis-ci.org/marlboromoo/willie-karma"><img src="https://api.travis-ci.org/marlboromoo/willie-karma.png" alt="Travis CI Build Status"></a></p>
 
 <h2>
 <a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>Author</h2>
@@ -103,8 +132,12 @@ williee -d
 
 <p>Released under the <a href="http://opensource.org/licenses/MIT" title="MIT License">MIT License</a>.</p>
       </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/marlboromoo">marlboromoo</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
     </div>
-
+    <script src="javascripts/scale.fix.js"></script>
     
   </body>
 </html>
