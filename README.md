@@ -47,6 +47,9 @@ williee -d
 | feedback | True | Notify by bot |
 | byself | False | Self (pro&#124;de)mote |
 
+If you want to see the debug messages, set the `verbose` to **verbose** under 
+the `[core]` section.
+
 ## Usage
  * Use `.karma <nickname>` to get karma status.
  * Input `<nickname>++ [#] [Reason]` to promote.
