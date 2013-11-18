@@ -3,5 +3,11 @@ python:
   - "2.7"
 install:
   - pip install -r requirements.txt #--use-mirrors
-# command to run tests
+before_script: 
+  - mkdir -p ~/.willie/modules
+  - ls -ld ~/.willie/modules
+  - ln -s $(pwd)/karma.py ~/.willie/modules/
+  - ls -l ~/.willie/modules/karma.py
+  - ln -s $(pwd)/doc/karma.cfg ~/.willie/default.cfg
+  - ls -l ~/.willie/default.cfg
 script: PYTHONPATH=./ python -m pytest test/test.py && willie -d && willie -q
