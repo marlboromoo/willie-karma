@@ -90,7 +90,10 @@ def is_true(value):
     :returns: True or False
 
     """
-    return True if  value.lower() == 'true' else False
+    try:
+        return True if  value.lower() == 'true' else False
+    except Exception:
+        return value
 
 def get_table(bot):
     """Return the table instance.
